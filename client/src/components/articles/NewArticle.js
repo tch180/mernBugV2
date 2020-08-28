@@ -59,6 +59,7 @@ const NewArticle = () => {
           </h1>
           <div>
             <label htmlFor='name'>Title:</label>
+
             <input
               type='text'
               className='form-control'

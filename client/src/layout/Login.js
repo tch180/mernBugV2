@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Fragment } from 'react';
 import AuthContext from '../context/Auth/authContext';
 import AlertContext from '../context/alert/alertContext';
+import BackgroundVideo from './BackgroundVideo';
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
@@ -42,44 +43,46 @@ const Login = (props) => {
   };
 
   return (
-    <div
-      onSubmit={onSubmit}
-      className='card mt-5 shadow'
-      style={{ width: '18rem', margin: 'auto' }}>
-      <h1 className='card-title'>
-        Account <span className='text=primary'>Login</span>
-      </h1>
-      <form className='card-body' onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='exampleInputEmail1'>Email address</label>
-          <input
-            className='form-control'
-            type='email'
-            name='email'
-            value={email}
-            onChange={onChange}
-            required
-          />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
-          </small>
+    <Fragment>
+      <div className='container1'>
+        <BackgroundVideo />
+        <div onSubmit={onSubmit} className='card1' style={{ width: '18rem' }}>
+          <h1 className='card-title'>
+            Account <span className='text=primary'>Login</span>
+          </h1>
+          <form className='card-body' onSubmit={onSubmit}>
+            <div className='form-group'>
+              <label htmlFor='exampleInputEmail1'>Email address</label>
+              <input
+                className='form-control'
+                type='email'
+                name='email'
+                value={email}
+                onChange={onChange}
+                required
+              />
+              <small id='emailHelp' className='form-text'>
+                We'll never share your email with anyone else.
+              </small>
+            </div>
+            <div className='form-group'>
+              <label htmlFor='exampleInputPassword1'>Password</label>
+              <input
+                className='form-control'
+                type='password'
+                name='password'
+                value={password}
+                onChange={onChange}
+                required
+              />
+            </div>
+            <button type='submit' value='login' className='btn btn-primary'>
+              Submit
+            </button>
+          </form>
         </div>
-        <div className='form-group'>
-          <label htmlFor='exampleInputPassword1'>Password</label>
-          <input
-            className='form-control'
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <button type='submit' value='login' className='btn btn-primary'>
-          Submit
-        </button>
-      </form>
-    </div>
+      </div>
+    </Fragment>
   );
 };
 

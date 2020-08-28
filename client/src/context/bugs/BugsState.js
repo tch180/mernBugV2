@@ -11,6 +11,8 @@ import {
   ADD_BUGS,
   SET_CURRENT,
   CLEAR_CURRENT,
+  FILTER_BUGS,
+  CLEAR_BUGS_FILTER,
 } from '../types';
 
 const BugState = (props) => {
@@ -18,6 +20,7 @@ const BugState = (props) => {
     bugs: null,
     current: null,
     error: null,
+    bugsFiltered: null,
   };
 
   const [state, dispatch] = useReducer(bugReducer, initialState);
@@ -76,9 +79,17 @@ const BugState = (props) => {
   const setCurrent = (bugs) => {
     dispatch({ type: SET_CURRENT, payload: bugs });
   };
-
+  // clear current bug
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
+  };
+  //FILTER BUGS
+  const filterBugs = (text) => {
+    dispatch({ type: FILTER_BUGS, payload: text });
+  };
+  // CLEAR FILTER
+  const clearBugFilter = () => {
+    dispatch({ type: CLEAR_BUGS_FILTER });
   };
 
   return (
@@ -86,6 +97,7 @@ const BugState = (props) => {
       value={{
         bugs: state.bugs,
         current: state.current,
+        bugsFiltered: state.bugsFiltered,
         error: state.error,
         getBugs,
         deleteBug,
@@ -93,6 +105,8 @@ const BugState = (props) => {
         updateBug,
         setCurrent,
         clearCurrent,
+        filterBugs,
+        clearBugFilter,
       }}>
       {props.children}
     </BugContext.Provider>

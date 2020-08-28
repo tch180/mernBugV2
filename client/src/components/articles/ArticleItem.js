@@ -23,6 +23,9 @@ const ArticleItem = ({ article }) => {
         </span>
       </h2>
       <h4>Description: {description}</h4>
+      <h4>
+        <span>Id: {_id}</span>
+      </h4>
 
       <h3 className='text-primary'>Author: {author}</h3>
       <div

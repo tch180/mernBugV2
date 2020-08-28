@@ -1,6 +1,35 @@
 a {
   color: orangered;
 }
+.Video {
+  /* width: 100%; */
+  height: 100%;
+}
+.card1 {
+  position: absolute;
+  top: 0;
+  color: #f1f1f1;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* width: 100%; */
+  /* height: 100%; */
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  top: 403px;
+  left: 965px;
+}
+.Container1 {
+  position: relative;
+  min-height: 350px;
+  max-height: 800px;
+  overflow: hidden;
+  /* margin-bottom: 500px; */
+}
+
+.btn:not(:disabled):not(.disabled) {
+  color: orangered;
+}
 .text-primary {
   color: orangered !important;
 }

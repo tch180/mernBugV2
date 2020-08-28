@@ -1,5 +1,6 @@
 import React, { useContext, Fragment } from 'react';
 import AuthContext from '../context/Auth/authContext';
+import BugFilter from '../components/bugs/BugsFilter';
 
 export const NavBar = (props) => {
   const authContext = useContext(AuthContext);
@@ -33,6 +34,7 @@ export const NavBar = (props) => {
       <h4 className='navbar-brand' style={{ color: 'orangered' }}>
         Hello: {user && user.name}
       </h4>
+      <BugFilter />
     </Fragment>
   );
 
