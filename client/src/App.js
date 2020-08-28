@@ -36,6 +36,7 @@ function App() {
               <Fragment>
                 <NavBar />
                 <div className='App'>
+                  <Alerts />
                   <Switch>
                     <PrivateRoute exact path='/' component={Login} />
                     <Route path='/register' component={Register} />

@@ -21,6 +21,7 @@ const ArticlesHome = () => {
         </p>
         <hr className='my-4' style={{ color: 'orangered' }} />
       </div>
+      <NewArticle />
       <div
         className='row'
         style={{
@@ -31,7 +32,6 @@ const ArticlesHome = () => {
         }}>
         <Articles />
       </div>
-      <NewArticle />
     </Fragment>
   );
 };

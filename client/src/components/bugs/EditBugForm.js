@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BugContext from '../../context/bugs/bugContext';
 
 const EditBugForm = () => {
   const bugsContext = useContext(BugContext);
-  const { updateBug, current } = bugsContext;
+  const { deleteBug, updateBug, current } = bugsContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -18,81 +18,56 @@ const EditBugForm = () => {
     }
   }, [bugsContext, current]);
 
-  const [currentBug, setUpdateBug] = useState({
+  const onDelete = () => {
+    deleteBug(_id);
+  };
+
+  const [bugs, setUpdateBug] = useState({
     name: '',
     description: '',
     status: '',
     severity: '',
   });
 
-  const { _id, name, description, status, severity } = currentBug;
+  const { _id, name, description, status, severity } = bugs;
 
-  const onChange = (e) => {
-    setUpdateBug({ ...currentBug, [e.target.name]: e.target.value });
-  };
+  let modalId = _id.slice(1, 25);
+
+  const onChange = (e) =>
+    setUpdateBug({ ...bugs, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateBug(currentBug);
+    console.log('submit clicked');
+    // console.log(updateBug);
+    updateBug(bugs);
   };
-  //   useEffect(() => {
-  //     setUpdateBug({
-  //       updateId: _id,
-  //       updateName: '',
-  //       updateDescription: '',
-  //       updateStatus: '',
-  //       updateSeverity: '',
-  //     });
-  //   }, []);
-
-  //   const [updateModalBug, setUpdateBug] = useState({
-  //     updateId:'',
-  //     updateName: '',
-  //     updateDescription: '',
-  //     updateStatus: '',
-  //     updateSeverity: '',
-  //   });
-
-  //   const {
-  //     updateName,
-  //     updateDescription,
-  //     updateStatus,
-  //     updateSeverity,
-  //   } = updateModalBug;
-  //  useEffect(()=>{
-
-  //  })
-
-  //   const [bug, setUpdateBug] = useState({
-  //     name: '',
-  //     description: '',
-  //     status: '',
-  //     severity: '',
-  //   });
-  let modalId = _id.slice(1, 25);
-
-  //   const onChange = (e) => {
-  //     setUpdateBug({ ...bug, [e.target.name]: e.target.value });
-  //   };
-  //   const onSubmit = (e) => {
-  //     e.preventDefault();
-  //     updateBug(bug);
-  //   };
-  //   const { _id, name, description, status, severity } = bug;
-
+  // calling ^^ bugs here, causes the cast to objectID failed for value "undefined at path "_id" this could be due to the names not matching on the back end.
+  // calling ^^ bug here, essentially just creates a new empty state. and resubmits the same info so no change is in the info is captured.
+  // state is immutable.. using the spread operator will essentially create a "new state" but the values need to be the same, The issue right now is that I can not use the same values on the form
+  // because that will break the onChange function, and not capture the change. Hit a brick wall here, Not sure how to move forward. I have reached out to a few ppl for some help 8/27/2020
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+      {/* // modal trigger */}
+      <button
+        data-target={'#' + modalId}
+        type='button'
+        className='btn btn-primary'
+        data-toggle='modal'>
+        Edit
+      </button>{' '}
+      *{/* MODAL  */}
       <form onSubmit={onSubmit} id='form'>
         <div
           className='modal fade'
           id={modalId}
           tabIndex='-1'
-          aria-labelledby='exampleModalLabel'
+          aria-labelledby='editBugForm'
           aria-hidden='true'>
           <div className='modal-dialog  modal-dialog-centered  modal-xl '>
             <div className='modal-content p-3'>
               <div className='modal-header'>
-                <h5 className='modal-title' id='exampleModalLabel'>
+                <h5 className='modal-title' id='editBugForm'>
                   {name}
                 </h5>
                 <div>
@@ -127,7 +102,7 @@ const EditBugForm = () => {
                 id='Update Description'
                 className='form-control'
                 rows='6'
-                // placeholder={description}
+                placeholder={description}
                 name='description'
                 value={description}
                 onChange={onChange}

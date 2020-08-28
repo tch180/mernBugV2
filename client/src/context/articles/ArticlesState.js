@@ -8,11 +8,14 @@ import {
   DELETE_ARTICLE,
   UPDATE_ARTICLE,
   ARTICLES_ERROR,
+  SET_CURRENT_ARTICLE,
+  CLEAR_CURRENT_ARTICLE,
 } from '../types';
 
 const ArticlesState = (props) => {
   const initialState = {
     articles: [],
+    currentArticle: null,
   };
 
   const [state, dispatch] = useReducer(articlesReducer, initialState);
@@ -40,6 +43,33 @@ const ArticlesState = (props) => {
     }
   };
 
+  //UPDATE ARTICLE
+
+  const updateArticle = async (articles) => {
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.put(
+        `/api/articles/${articles._id}`,
+        articles,
+        config
+      );
+      dispatch({ type: UPDATE_ARTICLE, payload: res.data });
+    } catch (err) {
+      dispatch({ type: ARTICLES_ERROR, payload: err.response.msg });
+    }
+  };
+
+  const setCurrentArticle = (articles) => {
+    dispatch({ type: SET_CURRENT_ARTICLE, payload: articles });
+  };
+
+  const clearCurrentArticle = () => {
+    dispatch({ type: CLEAR_CURRENT_ARTICLE });
+  };
   // DELETE ARTICLE !!!
   const deleteArticle = async (id) => {
     try {
@@ -54,9 +84,13 @@ const ArticlesState = (props) => {
     <ArticleContext.Provider
       value={{
         articles: state.articles,
+        currentArticle: state.currentArticle,
         getArticles,
         deleteArticle,
         addArticle,
+        updateArticle,
+        setCurrentArticle,
+        clearCurrentArticle,
       }}>
       {props.children}
     </ArticleContext.Provider>

@@ -10,6 +10,7 @@ import {
   UPDATE_BUGS,
   ADD_BUGS,
   SET_CURRENT,
+  CLEAR_CURRENT,
 } from '../types';
 
 const BugState = (props) => {
@@ -76,6 +77,10 @@ const BugState = (props) => {
     dispatch({ type: SET_CURRENT, payload: bugs });
   };
 
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+
   return (
     <BugContext.Provider
       value={{
@@ -87,6 +92,7 @@ const BugState = (props) => {
         addBugs,
         updateBug,
         setCurrent,
+        clearCurrent,
       }}>
       {props.children}
     </BugContext.Provider>

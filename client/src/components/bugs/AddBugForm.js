@@ -3,16 +3,19 @@ import BugContext from '../../context/bugs/bugContext';
 
 const AddBugForm = () => {
   const bugContext = useContext(BugContext);
-  const { addBugs } = bugContext;
+  const { addBugs, current, updateBug, clearCurrent } = bugContext;
 
   useEffect(() => {
-    setBug({
-      name: '',
-      description: '',
-      status: 'Submitted',
-      severity: 'Medium',
-    });
-  }, [bugContext]);
+    if (current !== null) {
+      setBug(current);
+    } else
+      setBug({
+        name: '',
+        description: '',
+        status: 'Submitted',
+        severity: 'Medium',
+      });
+  }, [bugContext, current]);
 
   const [bug, setBug] = useState({
     name: '',
@@ -27,9 +30,16 @@ const AddBugForm = () => {
     setBug({ ...bug, [e.target.name]: e.target.value });
   };
 
+  const clearAll = () => {
+    clearCurrent();
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    addBugs(bug);
+    if (current === null) {
+      addBugs(bug);
+    } else {
+      updateBug(bug);
+    }
   };
 
   return (
@@ -37,7 +47,7 @@ const AddBugForm = () => {
       <div
         className='card mt-5 text-center '
         style={{ width: '22rem', margin: 'auto' }}>
-        <h1 className='text-primary'>Add-Bug</h1>
+        <h1 className='text-primary'> {current ? 'Edit Bug' : ' Add bug'}</h1>
         <form className='card-body' onSubmit={onSubmit} id='form'>
           <h2>Name</h2>
           <input
@@ -107,12 +117,19 @@ const AddBugForm = () => {
               onChange={onChange}
             />
             <span className='badge badge-pill badge-danger'> RedAlert </span>
+          </div>
+          <div>
+            <button type='submit' className='btn btn-success mt-3'>
+              {current ? 'Update bug' : 'Add Bug'}
+            </button>
+          </div>
+          {current && (
             <div>
-              <button type='submit' className='btn btn-success mt-3'>
-                Submit
+              <button className='btn btn-dark m-2' onClick={clearAll}>
+                Clear
               </button>
             </div>
-          </div>
+          )}
         </form>
       </div>
     </>

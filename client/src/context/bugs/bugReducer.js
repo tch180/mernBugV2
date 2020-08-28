@@ -5,6 +5,7 @@ import {
   UPDATE_BUGS,
   BUG_ERROR,
   SET_CURRENT,
+  CLEAR_CURRENT,
 } from '../types';
 
 export default (state, action) => {
@@ -31,6 +32,11 @@ export default (state, action) => {
       return {
         ...state,
         current: action.payload,
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
       };
     case BUG_ERROR:
       return {

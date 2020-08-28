@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import ArticleContext from '../../context/articles/articleContext';
 
 const ArticleItem = ({ article }) => {
-  const { name, description, date, _id, author } = article;
-
   const articleContext = useContext(ArticleContext);
-  const { deleteArticle } = articleContext;
+  const { deleteArticle, setCurrentArticle } = articleContext;
+
+  const { name, description, date, _id, author } = article;
 
   const onDelete = () => {
     deleteArticle(_id);
@@ -30,7 +30,10 @@ const ArticleItem = ({ article }) => {
           display: 'flex',
           justifyContent: 'space-evenly',
         }}>
-        <button type='button' className='btn btn-info'>
+        <button
+          type='button'
+          className='btn btn-info'
+          onClick={() => setCurrentArticle(article)}>
           Edit
         </button>
         <button type='button' className='btn btn-danger' onClick={onDelete}>

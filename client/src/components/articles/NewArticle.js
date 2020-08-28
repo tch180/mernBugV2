@@ -1,15 +1,27 @@
 import React, { useEffect, useContext, useState } from 'react';
 import ArticleContext from '../../context/articles/articleContext';
-// import { Editor, EditorState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 const NewArticle = () => {
   const articleContext = useContext(ArticleContext);
-  const { addArticle } = articleContext;
+  const {
+    addArticle,
+    updateArticle,
+    clearCurrentArticle,
+    currentArticle,
+    setCurrentArticle,
+  } = articleContext;
 
-  // const [editorState, setEditorState] = useState(() =>
-  //   EditorState.createEmpty()
-  // );
+  useEffect(() => {
+    if (currentArticle !== null) {
+      setArticle(currentArticle);
+    } else
+      setArticle({
+        name: '',
+        description: '',
+        author: '',
+      });
+  }, [articleContext, currentArticle, setCurrentArticle]);
 
   const [article, setArticle] = useState({
     name: '',
@@ -17,16 +29,11 @@ const NewArticle = () => {
     author: '',
   });
 
-  useEffect(() => {
-    setArticle({
-      name: '',
-      description: '',
-      author: '',
-    });
-  }, [articleContext]);
-
   const { name, description, author } = article;
 
+  const clearAll = () => {
+    clearCurrentArticle();
+  };
   const onChange = (e) => {
     setArticle({
       ...article,
@@ -36,13 +43,20 @@ const NewArticle = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addArticle(article);
+    if (currentArticle === null) {
+      addArticle(article);
+    } else {
+      updateArticle(article);
+    }
   };
 
   return (
     <>
-      <div className='card mt-5' style={{ width: '22rem', margin: 'auto' }}>
+      <div className='card mt-5' style={{ margin: 'auto' }}>
         <form className='card-body' onSubmit={onSubmit} id='form'>
+          <h1 className='text-primary'>
+            {currentArticle ? 'Edit Article' : 'Add Article'}
+          </h1>
           <div>
             <label htmlFor='name'>Title:</label>
             <input
@@ -72,11 +86,19 @@ const NewArticle = () => {
               name='author'
               value={author}
               onChange={onChange}
+              required
             />
           </div>
-          <button type='submit' className='btn btn-primary mt-3'>
-            Submit
-          </button>
+          <div>
+            <button type='submit' className='btn btn-success m-3'>
+              {currentArticle ? 'Update Article' : 'Add Article'}
+            </button>
+            {currentArticle && (
+              <button className='btn btn-dark m-3' onClick={clearAll}>
+                Clear
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </>
