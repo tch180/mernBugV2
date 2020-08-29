@@ -46,7 +46,7 @@ const Login = (props) => {
     <Fragment>
       <div className='container1'>
         <BackgroundVideo />
-        <div onSubmit={onSubmit} className='card1' style={{ width: '18rem' }}>
+        <div onSubmit={onSubmit} className='card1' style={{ width: '22rem' }}>
           <h1 className='card-title'>
             Account <span className='text=primary'>Login</span>
           </h1>

@@ -5,7 +5,7 @@ import backgroundVid from '../vids/slow-motion-smashing-computer-monitor_-jm_0mw
 const BackgroundVideo = () => {
   // const videoSource = {backgroundVid}
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid p-0'>
       <video autoPlay='autoplay' loop='loop'>
         <source src={backgroundVid} type='video/mp4' />
       </video>

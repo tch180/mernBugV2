@@ -1,22 +1,24 @@
 import React, { useContext, useRef, useEffect } from 'react';
-import BugContext from '../../context/bugs/bugContext';
+import ArticleContext from '../../context/articles/articleContext';
 
-export const BugFilter = () => {
-  const bugContext = useContext(BugContext);
+export const ArticlesFilter = () => {
+  const articleContext = useContext(ArticleContext);
   const text = useRef('');
-  const { filterBugs, clearBugFilter, bugsFiltered } = bugContext;
-
+  const {
+    articlesFiltered,
+    clearTheArticlesFilter,
+    filterArticles,
+  } = articleContext;
   useEffect(() => {
-    if (bugsFiltered === null) {
+    if (articlesFiltered === null) {
       text.current.value = '';
     }
   });
-
   const onChange = (e) => {
     if (text.current.value !== '') {
-      filterBugs(e.target.value);
+      filterArticles(e.target.value);
     } else {
-      clearBugFilter();
+      clearTheArticlesFilter();
     }
   };
   return (
@@ -32,4 +34,4 @@ export const BugFilter = () => {
     </form>
   );
 };
-export default BugFilter;
+export default ArticlesFilter;

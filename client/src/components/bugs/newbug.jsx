@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../../layout/Spinner.js';
 import BugContext from '../../context/bugs/bugContext';
 import BugItem from './BugItem';
+import BugFilter from '../bugs/BugsFilter';
 
 const NewBug = () => {
   const bugContext = useContext(BugContext);
@@ -20,6 +21,16 @@ const NewBug = () => {
   }
   return (
     <Fragment>
+      <div
+        className='search m-1'
+        style={{ display: 'flex', justifyContent: 'center' }}>
+        <h3>Search:</h3>
+
+        <span className=' m-1'>
+          <BugFilter />
+        </span>
+      </div>
+
       <div>
         {bugs !== null && !loading ? (
           <div

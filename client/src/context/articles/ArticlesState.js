@@ -10,12 +10,16 @@ import {
   ARTICLES_ERROR,
   SET_CURRENT_ARTICLE,
   CLEAR_CURRENT_ARTICLE,
+  FILTER_ARTICLES,
+  CLEAR_ARTICLES_FILTER,
 } from '../types';
 
 const ArticlesState = (props) => {
   const initialState = {
     articles: [],
     currentArticle: null,
+    error: null,
+    articlesFiltered: null,
   };
 
   const [state, dispatch] = useReducer(articlesReducer, initialState);
@@ -62,14 +66,22 @@ const ArticlesState = (props) => {
       dispatch({ type: ARTICLES_ERROR, payload: err.response.msg });
     }
   };
-
+  //SET CURRENT ARTICLE
   const setCurrentArticle = (articles) => {
     dispatch({ type: SET_CURRENT_ARTICLE, payload: articles });
   };
-
+  //CLEAR CURRENT ARTICLE
   const clearCurrentArticle = () => {
     dispatch({ type: CLEAR_CURRENT_ARTICLE });
   };
+  //FILTER ARTICLES
+  const filterArticles = (text) => {
+    dispatch({ type: FILTER_ARTICLES, payload: text });
+  };
+  const clearTheArticlesFilter = () => {
+    dispatch({ type: CLEAR_ARTICLES_FILTER });
+  };
+
   // DELETE ARTICLE !!!
   const deleteArticle = async (id) => {
     try {
@@ -85,12 +97,16 @@ const ArticlesState = (props) => {
       value={{
         articles: state.articles,
         currentArticle: state.currentArticle,
+        articlesFiltered: state.articlesFiltered,
+        error: state.error,
         getArticles,
         deleteArticle,
         addArticle,
         updateArticle,
         setCurrentArticle,
         clearCurrentArticle,
+        filterArticles,
+        clearTheArticlesFilter,
       }}>
       {props.children}
     </ArticleContext.Provider>

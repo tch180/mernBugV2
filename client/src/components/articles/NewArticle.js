@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
 import ArticleContext from '../../context/articles/articleContext';
-import 'draft-js/dist/Draft.css';
 
 const NewArticle = () => {
   const articleContext = useContext(ArticleContext);
