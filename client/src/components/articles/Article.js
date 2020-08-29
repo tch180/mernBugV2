@@ -44,14 +44,6 @@ const Article = () => {
           <Spinner />
         )}
       </div>
-
-      {/* <div>
-     
-        <ArticlesFilter />
-      </div>
-      {articles.map((article) => (
-        <ArticleItem key={article._id} article={article} />
-      ))} */}
     </Fragment>
   );
 };

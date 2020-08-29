@@ -53,23 +53,6 @@ const NewBug = () => {
         )}
       </div>
     </Fragment>
-    //   <Fragment>
-    //     {bugs !== null && !loading ? (
-    //       <div
-    //         className='row p-5'
-    //         style={{
-    //           display: 'flex',
-    //           justifyContent: 'space-between',
-    //         }}>
-    //         {bugs.map((bug) => (
-    //           <BugItem key={bug._id} bug={bug} />
-    //         ))}
-    //       </div>
-    //     ) : (
-    //       <Spinner />
-    //     )}
-    //   </Fragment>
-    // );
   );
 };
 
