@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useContext } from 'react';
 import Articles from '../../components/articles/Article';
 import AuthContext from '../../context/Auth/authContext';
 import NewArticle from '../../components/articles/NewArticle';
-import ArticlesFilter from '../../components/articles/ArticlesFilter';
 
 const ArticlesHome = () => {
   const authContext = useContext(AuthContext);

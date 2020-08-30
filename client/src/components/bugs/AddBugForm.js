@@ -46,7 +46,7 @@ const AddBugForm = () => {
     <>
       <div
         className='card mt-5 text-center '
-        style={{ width: '22rem', margin: 'auto' }}>
+        style={{ width: '35rem', margin: 'auto' }}>
         <h1 className='text-primary'> {current ? 'Edit Bug' : ' Add bug'}</h1>
         <form className='card-body' onSubmit={onSubmit} id='form'>
           <h2>Name</h2>
@@ -61,13 +61,14 @@ const AddBugForm = () => {
           <h3 style={{ textAlign: 'center' }}>Bug Description</h3>
           <textarea
             type='text'
-            id='Description'
+            id='default'
             className='form-control'
             rows='3'
             placeholder='Minimum of 144 Characters'
             name='description'
             value={description}
-            onChange={onChange}></textarea>
+            onChange={onChange}
+          />
           <div className='form-group'>
             <label htmlFor='bug Status'>Bug Status</label>
             <select
