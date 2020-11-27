@@ -22,6 +22,7 @@ import setAuthToken from './utils/SetAuthToken';
 
 // Private Route
 import PrivateRoute from './components/routing/PrivateRoute';
+
 function App() {
   if (localStorage.token) {
     setAuthToken(localStorage.token);

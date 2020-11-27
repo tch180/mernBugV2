@@ -1,7 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
+import AuthContext from '../../context/Auth/authContext';
+
 import ArticleContext from '../../context/articles/articleContext';
 
-const NewArticle = () => {
+const NewArticle = (props) => {
+  const authContext = useContext(AuthContext);
+
+  const { isAuthenticated, logout, user } = authContext;
+
   const articleContext = useContext(ArticleContext);
   const {
     addArticle,
@@ -28,7 +34,8 @@ const NewArticle = () => {
     author: '',
   });
 
-  const { name, description, author } = article;
+  const { name, description,  } = article;
+  const author = user && user.name
 
   const clearAll = () => {
     clearCurrentArticle();
@@ -79,15 +86,16 @@ const NewArticle = () => {
             />
           </div>
           <div>
-            <label htmlFor='author'>Author:</label>
-            <input
+  <label htmlFor='author'>Author: {user && user.name}</label>
+             <input
               type='text'
               className='form-control'
               name='author'
               value={author}
-              onChange={onChange}
+              // onChange={onChange}
               required
-            />
+              disabled
+            /> 
           </div>
           <div>
             <button type='submit' className='btn btn-success m-3'>
